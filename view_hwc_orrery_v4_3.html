@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HWC Orrery v4.3</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #030611;
+      color: #fffaf1;
+      font-family: Arial, Helvetica, sans-serif;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+    header {
+      padding: 20px 28px 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+    }
+    h1 {
+      margin: 0;
+      font: 700 30px/1.05 Georgia, "Times New Roman", serif;
+    }
+    p {
+      margin: 5px 0 0;
+      color: #b9c7d8;
+    }
+    a { color: #8ee7ff; }
+    main {
+      padding: 0 28px 28px;
+    }
+    .frame {
+      border: 1px solid rgba(255,255,255,0.18);
+      background: #02050d;
+      box-shadow: 0 24px 90px rgba(0,0,0,0.45);
+    }
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+    }
+    @media (max-width: 800px) {
+      header { display: block; padding: 16px 14px 10px; }
+      main { padding: 0 14px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Potentially Habitable Worlds Orrery</h1>
+      <p>PHL HWC worlds, NASA Archive sky/orbital fields where available, de-crowded for readability.</p>
+    </div>
+    <p><a href="assets/hwc_orrery_v4_3/hwc_orrery_v4_3.gif">Open GIF file</a></p>
+  </header>
+  <main>
+    <div class="frame">
+      <img src="assets/hwc_orrery_v4_3/hwc_orrery_v4_3.gif" alt="Animated orrery of potentially habitable worlds">
+    </div>
+  </main>
+</body>
+</html>
