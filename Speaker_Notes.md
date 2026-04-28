@@ -8,11 +8,11 @@ Habitability is not just a planet sitting in the star's liquid-water zone. Earth
 
 We know the Copernican principle says we should not expect to find ourselves in a particularly special place. Extend it through time and it gets uncomfortable — if life can appear for trillions of years, it is suspicious that we appear in the first billions. The anthropic principle pushes back: we can only find ourselves in a moment that supports observers.
 
-So the Fermi question is a filter question. The hard-steps model treats the path from primordial goop to civilization as a chain of fluke events, each extremely unlikely per year but inevitable given enough time. The appendix staircase lists candidate steps; the probability map from "If Loud Aliens Explain Human Earliness, Quiet Aliens Are Also Rare" (Hanson, Martin, McCarter, and Paulson, 2021) shows our birth rank shifting from typical to wildly early as either the step count or the maximum planet lifetime grows.
+So the Fermi question is a filter question. The hard-steps model treats the path from primordial goop to civilization as a chain of fluke events, each extremely unlikely per year but inevitable given enough time. The staircase on screen lists the candidate steps, from primordial goop to technological civilization; the probability map next to it, from "If Loud Aliens Explain Human Earliness, Quiet Aliens Are Also Rare" (Hanson, Martin, McCarter, and Paulson, 2021), shows our birth rank shifting from typical to wildly early as either the step count or the maximum planet lifetime grows.
 
 ## Slide 3 cue: chemistry had to become evolvable.
 
-LUCA means Last Universal Common Ancestor, not first life — the shared ancestor inferred from genetics across known life today. Pre-LUCA pathways include Miller-Urey chemistry, organics from space, vents, iron-sulfur chemistry, clays, RNA-world models, and homochirality. The Miller-Urey appendix slide shows the apparatus: simulated atmosphere plus an electric spark giving real amino acids in a flask.
+LUCA means Last Universal Common Ancestor, not first life — the shared ancestor inferred from genetics across known life today. Pre-LUCA pathways include Miller-Urey chemistry, organics from space, vents, iron-sulfur chemistry, clays, RNA-world models, and homochirality. Here's the Miller-Urey apparatus: simulated atmosphere plus an electric spark giving real amino acids in a flask.
 
 Clays deserve more weight than usual. Open ocean is too dilute to chain monomers into long polymers, but clay surfaces concentrate organics, hold them in repeating geometries, and catalyze the long chains that RNA and peptides need. That is the bridge from small-molecule chemistry toward stored information.
 
