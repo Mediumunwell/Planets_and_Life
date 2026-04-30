@@ -1,0 +1,53 @@
+# Image Sources for Presentation Final Draft
+
+- Miller-Urey apparatus: reused from the existing v5 talk asset at `anthropic_principle_talk/assets/v5_extras/miller_urey.png`.
+- Hard-steps model image: reused from the existing v5 talk asset at `anthropic_principle_talk/assets/v5_extras/hard_steps_model_clean.png`.
+- Birth-rank / max planet lifetime plot: reused from the existing v5 talk asset at `anthropic_principle_talk/transcripts/Max_Planet_Lifetime.png`; slide credit remains Hanson, Martin, McCarter, and Paulson (2021).
+- Hydrothermal vent: Wikimedia Commons file "Blacksmoker in Atlantic Ocean.jpg"; source listed there as NOAA Photo Library, public domain.
+  - https://commons.wikimedia.org/wiki/File:Blacksmoker_in_Atlantic_Ocean.jpg
+- Loki's Castle hydrothermal vent field: The Planetary Society image credited to R.B. Pedersen/Centre for Geobiology, licensed CC BY 3.0.
+  - https://www.planetary.org/space-images/lokis-castle
+- Hot spring / microbial mat setting: Wikimedia Commons file "Aerial image of Grand Prismatic Spring (view from the south).jpg".
+  - https://commons.wikimedia.org/wiki/File:Aerial_image_of_Grand_Prismatic_Spring_(view_from_the_south).jpg
+- Stromatolites: Wikimedia Commons file "Stromatolites in Sharkbay.jpg".
+  - https://commons.wikimedia.org/wiki/File:Stromatolites_in_Sharkbay.jpg
+- Asgard archaea / Norse names reference: Nature article "Asgard archaea illuminate the origin of eukaryotic cellular complexity."
+  - https://www.nature.com/articles/nature21031
+- Hard-steps timeline figure: Mills et al., "A reassessment of the hard-steps model for the evolution of intelligent life," Science Advances 2025; mirrored at PMC under CC BY 4.0.
+  - https://pmc.ncbi.nlm.nih.gov/articles/PMC11827626/
+  - https://www.science.org/doi/10.1126/sciadv.ads5698
+- Habitability-window / abiogenesis-window graphs: Snyder-Beattie, Sandberg, Drexler, and Bonsall, "The Timing of Evolutionary Transitions Suggests Intelligent Life is Rare," Astrobiology 2021, Fig. 5.
+  - https://pmc.ncbi.nlm.nih.gov/articles/PMC7997718/
+  - https://journals.sagepub.com/doi/10.1089/ast.2019.2149
+- Anton Petrov transcript used for Mars update notes and cautious framing: `d5HR9JNKg7I`.
+  - https://www.youtube.com/watch?v=d5HR9JNKg7I
+- Anton Petrov transcript used for hard-steps / great filter framing: `OD9nYixgp6A`.
+  - https://www.youtube.com/watch?v=OD9nYixgp6A
+- Kaolinite / rain-driven ancient Mars source: Broz et al., "Alteration history of aluminum-rich rocks at Jezero crater, Mars," Communications Earth & Environment 2025, DOI 10.1038/s43247-025-02856-3.
+  - https://phys.org/news/2025-12-evidence-driven-climate-mars-jezero.html
+- Long-chain Martian organics source: Freissinet et al., "Long-chain alkanes preserved in a Martian mudstone," PNAS 2025, DOI 10.1073/pnas.2420580122.
+  - https://www.pnas.org/doi/10.1073/pnas.2420580122
+- Martian dust-devil electrical discharges source: NASA/JPL, "NASA Rover Detects Electric Sparks in Mars Dust Devils, Storms," Dec. 3, 2025.
+  - https://www.jpl.nasa.gov/news/nasa-rover-detects-electric-sparks-in-mars-dust-devils-storms/
+- Hapcheon / Jeokjung-Chogye impact crater stromatolites: Nature / Communications Earth & Environment 2026, "Stromatolites provide evidence for an oxygen oasis in a post-impact crater lake."
+  - https://www.nature.com/articles/s43247-026-03206-7
+- Hapcheon Basin geomorphology figure: Frontiers in Earth Science 2023, "Geomorphological and sedimentological characteristics of the Hapcheon impact crater, South Korea."
+  - https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2023.1102785/full
+  - https://www.frontiersin.org/files/Articles/1102785/feart-11-1102785-HTML-r1/image_m/feart-11-1102785-g001.jpg
+- Hwangmaesan azalea sunset image: Haps Korea coverage of the Hapcheon Hwangmaesan Royal Azalea Festival.
+  - https://www.hapskorea.com/hapcheon-hwangmaesan-royal-azalea-festival-to-take-place-from-april-29th-to-may-14th/
+- Hapcheon Dam floating solar image: Asia Economy coverage of Hapcheon floating solar facilities.
+  - https://cm.asiae.co.kr/en/article/2022033014212651869
+- Jeokjung-Chogye Basin panorama / impact-crater overview image: Dong-A Science English news article.
+  - https://www.dongascience.com/en/news/42327
+- Mars kaolinite figures: Broz et al., "Alteration history of aluminum-rich rocks at Jezero crater, Mars," Communications Earth & Environment 2025.
+  - https://www.nature.com/articles/s43247-025-02856-3
+- NASA Scientific Visualization Studio long-chain Mars organics imagery.
+  - https://svs.gsfc.nasa.gov/14808/
+- Current symbiogenesis diagram used in v8: Wikimedia Commons file "Symbiogenesis 2 mergers.svg" by Chiswick Chap, 2023.
+  - https://commons.wikimedia.org/wiki/File:Symbiogenesis_2_mergers.svg
+  - https://en.wikipedia.org/wiki/Symbiogenesis
+- Gaia spacecraft image used in v8: Wikimedia Commons file "The Gaia Spacecraft (eso1908d).jpg"; credit ESA/ATG medialab.
+  - https://commons.wikimedia.org/wiki/File:The_Gaia_Spacecraft_(eso1908d).jpg
+- ESA Gaia mission / data release context.
+  - https://www.cosmos.esa.int/web/gaia/release

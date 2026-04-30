@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Planets and Life 16.6-16.10 Final Draft</title>
+  <style>
+    @page { size: 16in 9in; margin: 0; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #f8fbff;
+      background: #040711;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* ============================================================
+       Shared slide chrome
+       ============================================================ */
+    .slide {
+      width: 16in;
+      height: 9in;
+      page-break-after: always;
+      padding: 0.62in 0.78in;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(255, 205, 103, 0.15), transparent 18%),
+        radial-gradient(circle at 78% 22%, rgba(104, 198, 255, 0.14), transparent 24%),
+        radial-gradient(circle at 84% 80%, rgba(255, 98, 118, 0.10), transparent 26%),
+        linear-gradient(135deg, #02050d 0%, #060f1f 42%, #110720 100%);
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.92) 0 1px, transparent 1.4px),
+        radial-gradient(circle, rgba(255,255,255,0.42) 0 1px, transparent 1.6px);
+      background-size: 0.39in 0.39in, 0.72in 0.72in;
+      background-position: 0.05in 0.1in, 0.2in 0.26in;
+      opacity: 0.30;
+      pointer-events: none;
+    }
+    .slide::after {
+      content: "";
+      position: absolute;
+      inset: 0.30in;
+      border: 1.6px solid rgba(255, 246, 210, 0.42);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .kicker, .lede, h1, .stage, .chips, .footer-note {
+      position: relative;
+      z-index: 2;
+    }
+    .kicker {
+      width: fit-content;
+      padding: 0.08in 0.16in;
+      margin-bottom: 0.18in;
+      border: 1px solid rgba(255,255,255,0.34);
+      background: rgba(5, 13, 26, 0.62);
+      color: #ffe28b;
+      font-size: 0.22in;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 0.22in;
+      max-width: 13.0in;
+      color: #fffaf1;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.62in;
+      line-height: 1.05;
+      text-shadow: 0 3px 22px rgba(0,0,0,0.78);
+    }
+    .lede {
+      max-width: 12.5in;
+      margin: 0 0 0.30in;
+      padding: 0.18in 0.22in;
+      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(3, 9, 19, 0.70);
+      color: #eef7ff;
+      font-size: 0.28in;
+      line-height: 1.32;
+    }
+    .lede strong { color: #ffd36a; }
+    .footer-note {
+      position: absolute;
+      left: 0.78in;
+      bottom: 0.62in;
+      max-width: 13.5in;
+      color: #b9c7d8;
+      font-size: 0.18in;
+      line-height: 1.30;
+      letter-spacing: 0.005in;
+    }
+    .footer-note strong { color: #ffd36a; }
+
+    .chips {
+      display: flex;
+      gap: 0.18in;
+      flex-wrap: wrap;
+    }
+    .chips span {
+      padding: 0.10in 0.18in;
+      border: 1px solid rgba(255,255,255,0.30);
+      background: rgba(5, 13, 26, 0.66);
+      color: #cfeeff;
+      font-size: 0.20in;
+      letter-spacing: 0.005in;
+    }
+    .chips span b {
+      color: #ffd36a;
+      margin-right: 0.10in;
+    }
+
+    /* ============================================================
+       Slide 1: Habitability is layered (moon / giant / HZ scene)
+       ============================================================ */
+    .moon-scale .deep-field {
+      position: absolute;
+      inset: -0.6in;
+      background:
+        radial-gradient(circle at 12% 26%, rgba(255, 223, 139, 0.20), transparent 9%),
+        radial-gradient(circle at 58% 18%, rgba(116, 216, 255, 0.16), transparent 12%),
+        radial-gradient(circle at 76% 74%, rgba(255, 126, 102, 0.12), transparent 16%);
+      opacity: 0.85;
+    }
+    .moon-scale .giant {
+      position: absolute;
+      right: -1.2in;
+      top: 0.3in;
+      width: 6.8in;
+      height: 6.8in;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0% 78%, rgba(8, 12, 28, 0.18) 88%, rgba(8, 12, 28, 0.45) 96%, rgba(8, 12, 28, 0.62) 100%),
+        linear-gradient(20deg, transparent 0 40%, rgba(255,255,255,0.10) 40% 45%, transparent 45% 100%),
+        repeating-linear-gradient(11deg,
+          #c8a878 0 0.18in,
+          #e6cc94 0.18in 0.30in,
+          #a07042 0.30in 0.44in,
+          #6b4222 0.44in 0.56in
+        );
+      box-shadow:
+        inset -0.55in -0.32in 0.85in rgba(0, 0, 0, 0.50),
+        inset 0 0 0.55in rgba(0, 0, 0, 0.30),
+        0 0 0.85in rgba(225, 190, 140, 0.32);
+      -webkit-mask-image: radial-gradient(circle, black 0% 88%, rgba(0,0,0,0.60) 95%, transparent 100%);
+      mask-image: radial-gradient(circle, black 0% 88%, rgba(0,0,0,0.60) 95%, transparent 100%);
+      z-index: 1;
+    }
+
+    /* Multi-ring system with proper depth occlusion.
+       Each ring exists as a back half (behind the planet) and a front
+       half (in front). Ring elements are tilted, then clipped to upper
+       (back) or lower (front) half of the local box BEFORE the rotate
+       per CSS draw order. */
+    .moon-scale .ring-back, .moon-scale .ring-front {
+      position: absolute;
+      border-radius: 50%;
+      transform: rotate(-15deg);
+    }
+    .moon-scale .ring-back  { clip-path: inset(0 0 50% 0); }
+    .moon-scale .ring-front { clip-path: inset(50% 0 0 0); }
+
+    .moon-scale .ring-back  { z-index: 0; }
+    .moon-scale .ring-front { z-index: 2; }
+
+    /* Inner ring (closer to planet, thinner and most opaque) */
+    .moon-scale .r-inner {
+      right: -1.65in;
+      top: 3.10in;
+      width: 7.7in;
+      height: 1.10in;
+      border: 0.07in solid rgba(255, 226, 168, 0.92);
+    }
+    /* Cassini-style gap separator */
+    .moon-scale .r-gap {
+      right: -1.95in;
+      top: 3.00in;
+      width: 8.4in;
+      height: 1.22in;
+      border: 0.02in dashed rgba(255, 222, 156, 0.30);
+    }
+    /* Middle ring - thicker, medium opacity */
+    .moon-scale .r-mid {
+      right: -2.30in;
+      top: 2.78in;
+      width: 9.2in;
+      height: 1.55in;
+      border: 0.16in solid rgba(255, 224, 158, 0.62);
+    }
+    /* Outer ring - thickest, most transparent */
+    .moon-scale .r-outer {
+      right: -2.85in;
+      top: 2.45in;
+      width: 10.3in;
+      height: 2.20in;
+      border: 0.26in solid rgba(255, 200, 132, 0.36);
+    }
+
+    /* Faint blue moon-orbit ring in the same plane as the yellow rings
+       (same -15deg tilt, similar aspect ratio), but a larger radius,
+       solid, and quietly translucent so it reads as another orbital
+       line rather than a second ring system. */
+    .moon-scale .orbit-back, .moon-scale .orbit-front {
+      position: absolute;
+      right: -5.30in;
+      top: 2.10in;
+      width: 15.0in;
+      height: 3.2in;
+      border: 0.05in solid rgba(176, 219, 255, 0.42);
+      border-radius: 50%;
+      transform: rotate(-15deg);
+      filter: drop-shadow(0 0 0.18in rgba(160, 215, 255, 0.22));
+    }
+    .moon-scale .orbit-back  { clip-path: inset(0 0 50% 0); z-index: 0; }
+    .moon-scale .orbit-front { clip-path: inset(50% 0 0 0); z-index: 2; }
+
+    .moon-scale .moon {
+      position: absolute;
+      right: 6.2in;
+      top: 5.45in;
+      width: 1.55in;
+      height: 1.55in;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 34% 30%, rgba(255,255,255,0.48) 0 0.06in, transparent 0.07in),
+        radial-gradient(circle at 50% 50%, #cfe7ff 0%, #6ea8d8 55%, #1c3f6d 100%);
+      box-shadow: inset -0.22in -0.18in 0.32in rgba(0,0,0,0.50), 0 0 0.5in rgba(78, 195, 255, 0.42);
+      z-index: 3;
+    }
+    .moon-scale .star-glint {
+      position: absolute;
+      left: -0.4in;
+      top: 6.4in;
+      width: 1.4in;
+      height: 1.4in;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff9b7 0 18%, #ffc642 38%, #ff7f45 60%, transparent 70%);
+      box-shadow: 0 0 0.65in rgba(255, 189, 73, 0.55);
+      opacity: 0.78;
+    }
+
+    /* Habitable zone shown as a broad translucent band, not a hairline.
+       Two layered ellipses (fill + outer glow ring) plus a quiet inner
+       dashed boundary so it reads as a "zone" rather than a wire. */
+    .moon-scale .hz-fill {
+      position: absolute;
+      left: -3.5in;
+      top: 3.6in;
+      width: 19in;
+      height: 5.8in;
+      border-radius: 50%;
+      background: radial-gradient(
+        ellipse at center,
+        transparent 0% 36%,
+        rgba(91, 234, 168, 0.10) 42%,
+        rgba(91, 234, 168, 0.22) 50%,
+        rgba(91, 234, 168, 0.28) 56%,
+        rgba(91, 234, 168, 0.22) 62%,
+        rgba(91, 234, 168, 0.10) 70%,
+        transparent 82%
+      );
+      transform: rotate(-9deg);
+      filter: blur(0.05in);
+    }
+    .moon-scale .hz-edge-outer {
+      position: absolute;
+      left: -3.4in;
+      top: 3.85in;
+      width: 18.8in;
+      height: 5.30in;
+      border: 0.025in dashed rgba(91, 234, 168, 0.55);
+      border-radius: 50%;
+      transform: rotate(-9deg);
+    }
+    .moon-scale .hz-edge-inner {
+      position: absolute;
+      left: -2.4in;
+      top: 4.65in;
+      width: 16.8in;
+      height: 3.65in;
+      border: 0.025in dashed rgba(91, 234, 168, 0.55);
+      border-radius: 50%;
+      transform: rotate(-9deg);
+    }
+    .moon-scale .hz-tag {
+      position: absolute;
+      right: 0.78in;
+      bottom: 0.62in;
+      padding: 0.08in 0.16in;
+      border: 1px solid rgba(120, 240, 178, 0.65);
+      background: rgba(5, 13, 26, 0.78);
+      color: #c8ffe2;
+      font-size: 0.18in;
+      letter-spacing: 0.01in;
+      text-transform: uppercase;
+      z-index: 4;
+    }
+    .moon-scale .hz-link {
+      position: absolute;
+      right: 0.78in;
+      bottom: 0.62in;
+      z-index: 4;
+      color: inherit;
+      text-decoration: none;
+    }
+    .moon-scale .hz-link .hz-tag {
+      position: static;
+      display: block;
+    }
+
+    /* Right-anchored bullet panel for slide 1 */
+    .moon-scale .bullets {
+      position: relative;
+      z-index: 3;
+      width: 7.4in;
+      margin-top: 0.10in;
+      padding: 0.30in 0.34in 0.26in 0.50in;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(3, 9, 19, 0.82);
+      box-shadow: 0 0.16in 0.55in rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.05);
+      font-size: 0.255in;
+      line-height: 1.30;
+      list-style: disc;
+    }
+    .moon-scale .bullets li { margin-bottom: 0.16in; }
+    .moon-scale .bullets li:last-child { margin-bottom: 0; }
+    .moon-scale .bullets strong { color: #ffd36a; }
+
+    /* ============================================================
+       Slide 2: Hard-steps + birth-rank visuals
+       ============================================================ */
+    .filters { padding-top: 0.46in; padding-bottom: 0.50in; }
+    .filters .kicker { margin-bottom: 0.10in; }
+    .filters h1 { margin-bottom: 0.12in; }
+    .filters .lede {
+      margin-bottom: 0.16in;
+      padding: 0.13in 0.20in;
+      font-size: 0.255in;
+      line-height: 1.30;
+    }
+    .filters .stage {
+      display: grid;
+      grid-template-columns: 11.0in 3.6in;
+      gap: 0.36in;
+      align-items: stretch;
+    }
+    .filters .img-box {
+      padding: 0.12in;
+      border: 1px solid rgba(255,255,255,0.27);
+      background: rgba(5, 13, 26, 0.78);
+      box-shadow: 0 0.16in 0.55in rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .filters .img-box img {
+      display: block;
+      max-width: 100%;
+      max-height: 4.85in;
+      object-fit: contain;
+    }
+    .filters .img-box.tall img { max-height: 4.6in; }
+    .filters .img-cap {
+      margin-top: 0.07in;
+      color: #b9c7d8;
+      font-size: 0.145in;
+      line-height: 1.24;
+      text-align: center;
+    }
+    .filters .footer-note {
+      bottom: 0.34in;
+      font-size: 0.118in;
+      line-height: 1.25;
+      color: #9faec3;
+    }
+
+    /* ============================================================
+       Slide 3: Miller-Urey apparatus
+       ============================================================ */
+    .chemistry .stage {
+      display: grid;
+      grid-template-columns: 6.4in 8.0in;
+      gap: 0.50in;
+      align-items: stretch;
+    }
+    .chemistry .pillars {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+      gap: 0.18in;
+    }
+    .chemistry .pillar {
+      padding: 0.20in 0.22in;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(3, 9, 19, 0.78);
+      color: #eef7ff;
+      font-size: 0.235in;
+      line-height: 1.30;
+    }
+    .chemistry .pillar b {
+      display: block;
+      margin-bottom: 0.06in;
+      color: #ffd36a;
+      font-size: 0.255in;
+    }
+    .chemistry .img-box {
+      padding: 0.20in;
+      border: 1px solid rgba(255,255,255,0.27);
+      background: rgba(255, 250, 235, 0.92);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .chemistry .img-box img {
+      display: block;
+      max-width: 100%;
+      max-height: 4.6in;
+      object-fit: contain;
+    }
+    .chemistry .img-cap {
+      margin-top: 0.12in;
+      color: #344057;
+      font-size: 0.16in;
+      text-align: center;
+    }
+
+    /* ============================================================
+       Slide 4: Endosymbiosis CSS diagram
+       ============================================================ */
+    .endo .stage {
+      position: relative;
+      height: 4.6in;
+      display: grid;
+      grid-template-columns: 4.2in 0.8in 4.2in 0.8in 4.2in;
+      grid-template-rows: 3.7in 0.55in;
+      align-items: center;
+      justify-items: center;
+      gap: 0.04in 0;
+    }
+    .endo .step {
+      grid-row: 1;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .endo .arrow {
+      grid-row: 1;
+      align-self: center;
+      justify-self: center;
+      color: #ffd36a;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.85in;
+      line-height: 1;
+      filter: drop-shadow(0 0 0.18in rgba(255, 211, 106, 0.45));
+    }
+
+    .archaeon, .bacterium, .eukaryote, .mito-inner, .nuc-inner {
+      border-radius: 50%;
+      position: relative;
+    }
+    .archaeon {
+      width: 3.0in;
+      height: 3.0in;
+      background:
+        radial-gradient(circle at 36% 30%, rgba(255,255,255,0.55) 0 0.10in, transparent 0.11in),
+        radial-gradient(circle at 50% 50%, #c2c0ff 0%, #8a86d6 55%, #3a356f 100%);
+      box-shadow: inset -0.30in -0.22in 0.55in rgba(0,0,0,0.40), 0 0 0.55in rgba(150, 140, 255, 0.45);
+    }
+    .bacterium {
+      width: 1.35in;
+      height: 1.35in;
+      background:
+        radial-gradient(circle at 36% 30%, rgba(255,255,255,0.55) 0 0.06in, transparent 0.07in),
+        radial-gradient(circle at 50% 50%, #ffe39c 0%, #f59f3a 60%, #8a3d18 100%);
+      box-shadow: inset -0.14in -0.10in 0.26in rgba(0,0,0,0.45), 0 0 0.32in rgba(255, 168, 90, 0.55);
+    }
+    .endo .step.merge {
+      flex-direction: row;
+    }
+    .endo .merge .archaeon {
+      width: 3.5in;
+      height: 3.5in;
+    }
+    .endo .merge .bacterium-inside {
+      position: absolute;
+      left: 50%;
+      top: 56%;
+      width: 1.30in;
+      height: 1.30in;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 36% 30%, rgba(255,255,255,0.55) 0 0.06in, transparent 0.07in),
+        radial-gradient(circle at 50% 50%, #ffe39c 0%, #f59f3a 60%, #8a3d18 100%);
+      box-shadow: inset -0.14in -0.10in 0.26in rgba(0,0,0,0.45), 0 0 0.36in rgba(255, 168, 90, 0.55);
+    }
+    .endo .pair {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.14in;
+    }
+    .endo .eukaryote {
+      width: 3.7in;
+      height: 3.7in;
+      background:
+        radial-gradient(circle at 36% 30%, rgba(255,255,255,0.55) 0 0.13in, transparent 0.14in),
+        radial-gradient(circle at 50% 50%, #b7eaff 0%, #5da3d8 50%, #18406f 100%);
+      box-shadow: inset -0.36in -0.26in 0.65in rgba(0,0,0,0.42), 0 0 0.65in rgba(126, 196, 255, 0.50);
+    }
+    .endo .nuc-inner {
+      position: absolute;
+      left: 30%;
+      top: 32%;
+      width: 1.30in;
+      height: 1.30in;
+      background:
+        radial-gradient(circle at 50% 50%, #ffd56a 0%, #c98326 60%, #6a3f07 100%);
+      box-shadow: inset -0.10in -0.08in 0.18in rgba(0,0,0,0.45), 0 0 0.20in rgba(255, 197, 73, 0.55);
+    }
+    .endo .mito-inner {
+      position: absolute;
+      right: 18%;
+      bottom: 22%;
+      width: 1.20in;
+      height: 0.85in;
+      border-radius: 45% / 50%;
+      background:
+        radial-gradient(circle at 50% 50%, #ffe39c 0%, #f59f3a 60%, #8a3d18 100%);
+      box-shadow: inset -0.08in -0.06in 0.16in rgba(0,0,0,0.45), 0 0 0.18in rgba(255, 168, 90, 0.55);
+    }
+    .endo .mito-inner::before, .endo .mito-inner::after {
+      content: "";
+      position: absolute;
+      left: 0.16in;
+      right: 0.16in;
+      height: 0.08in;
+      border-radius: 50%;
+      background: rgba(106, 53, 22, 0.55);
+    }
+    .endo .mito-inner::before { top: 0.20in; }
+    .endo .mito-inner::after { top: 0.42in; }
+
+    .endo .step-tag {
+      grid-row: 2;
+      align-self: start;
+      padding: 0.08in 0.18in;
+      border: 1px solid rgba(255,255,255,0.30);
+      background: rgba(5, 13, 26, 0.78);
+      color: #cfeeff;
+      font-size: 0.205in;
+      letter-spacing: 0.005in;
+      white-space: nowrap;
+    }
+    .endo .step-tag.t1 { grid-column: 1; }
+    .endo .step-tag.t2 { grid-column: 3; }
+    .endo .step-tag.t3 { grid-column: 5; }
+    .endo .step-tag b { color: #ffd36a; margin-right: 0.06in; }
+
+    /* ============================================================
+       Slide 3: Cell vocabulary before eukaryogenesis
+       ============================================================ */
+    .cell .taxonomy {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.18in;
+      margin-bottom: 0.22in;
+    }
+    .cell .tax-card {
+      min-height: 1.16in;
+      padding: 0.17in 0.20in;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(3, 9, 19, 0.76);
+      color: #eef7ff;
+      font-size: 0.185in;
+      line-height: 1.25;
+    }
+    .cell .tax-card b {
+      display: block;
+      margin-bottom: 0.05in;
+      color: #ffd36a;
+      font-size: 0.235in;
+    }
+    .cell .stage {
+      height: 3.15in;
+      grid-template-columns: 3.5in 0.55in 3.5in 0.55in 3.5in;
+      grid-template-rows: 2.58in 0.45in;
+      margin-top: 0.05in;
+    }
+    .cell .archaeon {
+      width: 1.85in;
+      height: 1.85in;
+    }
+    .cell .bacterium {
+      width: 0.95in;
+      height: 0.95in;
+    }
+    .cell .merge .archaeon {
+      width: 2.28in;
+      height: 2.28in;
+    }
+    .cell .merge .bacterium-inside {
+      width: 0.86in;
+      height: 0.86in;
+    }
+    .cell .eukaryote {
+      width: 2.55in;
+      height: 2.55in;
+    }
+    .cell .nuc-inner {
+      width: 0.82in;
+      height: 0.82in;
+    }
+    .cell .mito-inner {
+      width: 0.78in;
+      height: 0.53in;
+    }
+    .cell .arrow { font-size: 0.58in; }
+    .cell .step-tag {
+      padding: 0.06in 0.12in;
+      font-size: 0.145in;
+    }
+    .cell .asgard-strip {
+      margin-top: 0.18in;
+      padding: 0.16in 0.20in;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(5, 13, 26, 0.72);
+      color: #d7ecff;
+      font-size: 0.20in;
+      line-height: 1.26;
+    }
+    .cell .asgard-strip b { color: #ffd36a; }
+    .cell .asgard-names {
+      margin-top: 0.10in;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.10in;
+    }
+    .cell .asgard-names span {
+      padding: 0.06in 0.11in;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(190, 216, 255, 0.10);
+      color: #fff2bd;
+      font-size: 0.16in;
+    }
+
+    .timeline .figure-wrap {
+      position: relative;
+      z-index: 2;
+      padding: 0.16in;
+      border: 1px solid rgba(255,255,255,0.26);
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 0.18in 0.55in rgba(0,0,0,0.34);
+    }
+    .timeline .figure-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .timeline .callouts {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.16in;
+      margin-top: 0.18in;
+    }
+    .timeline .callout {
+      min-height: 1.08in;
+      padding: 0.15in 0.17in;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(3, 9, 19, 0.76);
+      color: #e7f1ff;
+      font-size: 0.165in;
+      line-height: 1.22;
+    }
+    .timeline .callout b {
+      display: block;
+      margin-bottom: 0.045in;
+      color: #ffd36a;
+      font-size: 0.205in;
+    }
+    .timeline .source-line {
+      position: absolute;
+      right: 0.23in;
+      bottom: 0.22in;
+      max-width: 6.5in;
+      padding: 0.035in 0.07in;
+      background: rgba(255,255,255,0.86);
+      color: #313744;
+      font-size: 0.10in;
+      line-height: 1.18;
+      text-align: right;
+    }
+    .timeline.v7-window h1 {
+      max-width: 14.2in;
+      font-size: 0.56in;
+    }
+    .timeline.v7-window .figure-wrap {
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    .timeline.v7-window .panel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.24in;
+    }
+    .timeline.v7-window .panel-card {
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 0.16in 0.50in rgba(0,0,0,0.34);
+      overflow: hidden;
+    }
+    .timeline.v7-window .panel-card img {
+      display: block;
+      width: 100%;
+      height: 3.08in;
+      object-fit: contain;
+      background: #fff;
+    }
+    .timeline.v7-window .panel-caption {
+      padding: 0.10in 0.14in 0.13in;
+      min-height: 0.72in;
+      background: rgba(5, 13, 26, 0.94);
+      color: #dfeeff;
+      font-size: 0.145in;
+      line-height: 1.25;
+    }
+    .timeline.v7-window .panel-caption b {
+      display: block;
+      margin-bottom: 0.025in;
+      color: #ffd36a;
+      font-size: 0.17in;
+    }
+    .timeline.v7-window .callouts {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 0.18in;
+    }
+    .timeline.v7-window .callout {
+      min-height: 1.00in;
+      font-size: 0.155in;
+    }
+    .timeline.v7-window .source-line {
+      right: 0.10in;
+      bottom: 0.08in;
+      max-width: 4.8in;
+      font-size: 0.085in;
+    }
+    .timeline.v9-synthesis .panel-card img {
+      height: 2.04in;
+    }
+    .timeline.v9-synthesis .panel-caption {
+      min-height: 0.52in;
+      font-size: 0.132in;
+    }
+    .timeline.v9-synthesis .synthesis-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.22in;
+      margin-top: 0.62in;
+    }
+    .timeline.v9-synthesis .synthesis-card {
+      display: grid;
+      grid-template-columns: 4.34in 1fr;
+      gap: 0.20in;
+      min-height: 2.88in;
+      padding: 0.20in;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(3, 9, 19, 0.76);
+      color: #dfeeff;
+      font-size: 0.195in;
+      line-height: 1.17;
+      align-items: center;
+    }
+    .timeline.v9-synthesis .synthesis-card img {
+      width: 4.34in;
+      height: 2.46in;
+      object-fit: contain;
+      background: #f8f4ec;
+    }
+    .timeline.v9-synthesis .synthesis-card b {
+      display: block;
+      margin-bottom: 0.06in;
+      color: #ffd36a;
+      font-size: 0.27in;
+    }
+
+    /* ============================================================
+       Slide 4: Origin settings image board
+       ============================================================ */
+    .origin .stage {
+      display: grid;
+      grid-template-columns: 4.45in 9.85in;
+      gap: 0.28in;
+      align-items: stretch;
+    }
+    .origin .miller-card, .origin .place-card {
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(3, 9, 19, 0.76);
+      overflow: hidden;
+    }
+    .origin .miller-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .origin .miller-card .lab-frame {
+      margin: 0.18in 0.18in 0;
+      height: 3.45in;
+      background: #f8f4ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .origin .miller-card img {
+      max-width: 96%;
+      max-height: 94%;
+      object-fit: contain;
+    }
+    .origin .caption {
+      padding: 0.14in 0.17in 0.17in;
+      color: #d9e8f7;
+      font-size: 0.16in;
+      line-height: 1.25;
+    }
+    .origin .caption b {
+      display: block;
+      margin-bottom: 0.04in;
+      color: #ffd36a;
+      font-size: 0.19in;
+    }
+    .origin .location-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.18in;
+    }
+    .origin .place-card img {
+      display: block;
+      width: 100%;
+      height: 2.58in;
+      object-fit: cover;
+    }
+    .origin .place-card.symbio img {
+      background: #f7f4e7;
+      object-fit: contain;
+      padding: 0.10in;
+    }
+    .origin .asgard-note {
+      position: relative;
+      z-index: 2;
+      margin-top: 0.18in;
+      padding: 0.11in 0.16in;
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(5, 13, 26, 0.76);
+      color: #dcecff;
+      font-size: 0.165in;
+      line-height: 1.25;
+    }
+    .origin .asgard-note b {
+      color: #ffd36a;
+    }
+    .origin.v9-origin h1 {
+      font-size: 0.54in;
+      max-width: 14.2in;
+    }
+    .origin.v9-origin .stage {
+      display: block;
+    }
+    .origin.v9-origin .memory-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.18in;
+    }
+    .origin.v9-origin .memory-card {
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(3, 9, 19, 0.76);
+      overflow: hidden;
+      min-height: 2.74in;
+    }
+    .origin.v9-origin .memory-grid.compact {
+      grid-template-columns: 4.55in repeat(3, 1fr);
+      align-items: stretch;
+    }
+    .origin.v9-origin .memory-grid.compact .memory-card {
+      min-height: 5.02in;
+    }
+    .origin.v9-origin .memory-grid.compact .memory-card img {
+      height: 3.78in;
+    }
+    .origin.v9-origin .memory-card.feature {
+      min-height: 5.02in;
+    }
+    .origin.v9-origin .memory-grid.compact .memory-card.feature img {
+      height: 4.38in;
+      object-fit: contain;
+      padding: 0.05in;
+    }
+    .origin.v9-origin .hapcheon-collage {
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      grid-template-rows: 1fr 1fr;
+      height: 4.38in;
+      gap: 0.055in;
+      padding: 0.055in;
+      background: #f7f4e7;
+    }
+    .origin.v9-origin .hapcheon-collage img {
+      width: 100%;
+      height: 100% !important;
+      object-fit: cover !important;
+      padding: 0 !important;
+      background: transparent;
+    }
+    .origin.v9-origin .hapcheon-collage .map-crop {
+      grid-row: 1 / span 2;
+      object-fit: contain !important;
+      object-position: center center;
+      background: #f7f4e7;
+    }
+    .origin.v9-origin .memory-card img {
+      display: block;
+      width: 100%;
+      height: 1.72in;
+      object-fit: cover;
+      background: #f7f4e7;
+    }
+    .origin.v9-origin .memory-card.contain img {
+      object-fit: contain;
+      padding: 0.06in;
+    }
+    .origin.v9-origin .memory-copy {
+      padding: 0.12in 0.15in 0.14in;
+      color: #d9e8f7;
+      font-size: 0.17in;
+      line-height: 1.20;
+    }
+    .origin.v9-origin .memory-copy b {
+      display: block;
+      margin-bottom: 0.04in;
+      color: #ffd36a;
+      font-size: 0.20in;
+    }
+
+    /* ============================================================
+       Slide 5: Gaia finale
+       ============================================================ */
+    .gaia-finale h1 {
+      max-width: 14.3in;
+      font-size: 0.56in;
+    }
+    .gaia-finale .stage {
+      display: grid;
+      grid-template-columns: 4.62in 4.15in 5.18in;
+      gap: 0.24in;
+      align-items: stretch;
+    }
+    .gaia-finale .idea-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.14in;
+    }
+    .gaia-finale .idea-card, .gaia-finale .image-card {
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(3, 9, 19, 0.76);
+      color: #dfeeff;
+    }
+    .gaia-finale .idea-card {
+      padding: 0.15in 0.18in;
+      font-size: 0.18in;
+      line-height: 1.25;
+    }
+    .gaia-finale .idea-card b {
+      display: block;
+      color: #ffd36a;
+      font-size: 0.21in;
+      margin-bottom: 0.035in;
+    }
+    .gaia-finale .image-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 5.36in;
+    }
+    .gaia-finale .image-card img {
+      display: block;
+      width: 100%;
+      height: 3.92in;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .gaia-finale .image-copy {
+      padding: 0.16in 0.19in;
+      font-size: 0.18in;
+      line-height: 1.26;
+    }
+    .gaia-finale .image-copy b {
+      display: block;
+      color: #ffd36a;
+      font-size: 0.22in;
+      margin-bottom: 0.05in;
+    }
+    .gaia-finale .closing-line {
+      margin-top: 0.12in;
+      color: #b9c7d8;
+      font-size: 0.155in;
+      line-height: 1.25;
+    }
+    .gaia-finale .mars-panel {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.13in;
+      align-content: stretch;
+    }
+    .gaia-finale .mars-thumb {
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(3, 9, 19, 0.76);
+      overflow: hidden;
+      color: #dfeeff;
+      display: flex;
+      flex-direction: column;
+      min-height: 2.61in;
+    }
+    .gaia-finale .mars-thumb img {
+      display: block;
+      width: 100%;
+      height: 1.96in;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+    .gaia-finale .mars-thumb div {
+      padding: 0.10in 0.13in 0.12in;
+      font-size: 0.165in;
+      line-height: 1.20;
+      margin-top: auto;
+    }
+    .gaia-finale .mars-thumb b {
+      display: block;
+      color: #ffd36a;
+      font-size: 0.20in;
+      margin-bottom: 0.03in;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Slide 1 - Habitability is layered -->
+  <section class="slide moon-scale">
+    <div class="scene">
+      <div class="deep-field"></div>
+      <div class="hz-fill"></div>
+      <div class="hz-edge-outer"></div>
+      <div class="hz-edge-inner"></div>
+      <a class="hz-link" href="https://github.com/Mediumunwell/Planets_and_Life/blob/main/assets/hwc_orrery_v4_3/hwc_orrery_v5.gif"><div class="hz-tag">stellar habitable zone</div></a>
+      <div class="star-glint"></div>
+      <div class="orbit-back"></div>
+      <div class="ring-back r-outer"></div>
+      <div class="ring-back r-mid"></div>
+      <div class="ring-back r-gap"></div>
+      <div class="ring-back r-inner"></div>
+      <div class="giant"></div>
+      <div class="ring-front r-outer"></div>
+      <div class="ring-front r-mid"></div>
+      <div class="ring-front r-gap"></div>
+      <div class="ring-front r-inner"></div>
+      <div class="orbit-front"></div>
+      <div class="moon"></div>
+    </div>
+    <div class="kicker">16.6 &middot; habitability is layered</div>
+    <h1>Habitability is bigger than one habitable zone</h1>
+    <ul class="bullets">
+      <li><strong>Stellar:</strong> liquid water needs the right distance from a star for long enough.</li>
+      <li><strong>Galactic:</strong> our Milky Way neighborhood is safer than the crowded center but still metal-rich enough for rocky planets.</li>
+      <li><strong>Planetary:</strong> the carbonate-silicate cycle can buffer CO<sub>2</sub> and climate over geologic time.</li>
+      <li><strong>Moons:</strong> giant planets are harsh, but their moons can share the star's habitable zone and gain tidal energy.</li>
+      <li><strong>Time:</strong> if observers can appear across vast future ages, our early arrival needs explanation.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 2 - Filters: hard steps + birth rank -->
+  <section class="slide filters">
+    <div class="kicker">16.8 &middot; filters across hard steps</div>
+    <h1>The timeline question is a filter question</h1>
+    <div class="lede">
+      <strong>Copernican</strong>: do not assume our place is special. <strong>Anthropic</strong>: we can only find ourselves in a moment that supports observers. The <strong>hard-steps model</strong> turns that tension into a chain of fluke events &mdash; rare per year, but inevitable given enough time.
+    </div>
+    <div class="stage">
+      <div class="img-box">
+        <img src="assets/v6_extras/hard_steps_model_clean.png" alt="Hard steps model staircase from primordial goop to technological civilization">
+        <div class="img-cap">Hard-steps staircase &middot; goop &rarr; self-replicating cells &rarr; eukaryotes &rarr; multicellularity &rarr; photosynthesis &rarr; sex &rarr; brains &rarr; civilization</div>
+      </div>
+      <div class="img-box tall">
+        <img src="assets/v6_extras/Max_Planet_Lifetime.png" alt="Birth-rank diagram: number of hard steps versus maximum planet lifetime">
+        <div class="img-cap">Birth-rank surface: are we typical, or wildly early?</div>
+      </div>
+    </div>
+    <div class="footer-note">
+      Both visuals are from <em>"If Loud Aliens Explain Human Earliness, Quiet Aliens Are Also Rare"</em> &mdash; Hanson, Martin, McCarter, and Paulson, 2021.
+    </div>
+  </section>
+
+  <!-- Slide 3 - Habitability windows and early starts -->
+  <section class="slide timeline v7-window v9-synthesis">
+    <div class="kicker">16.8 &middot; habitability windows</div>
+    <h1>The hard-steps math needs a chemistry bridge</h1>
+    <div class="figure-wrap panel-grid">
+      <div class="panel-card">
+        <img src="assets/v7_extras/snyder_fig5_top_final_transition_ratio.jpg" alt="Probability ratio for final transitions versus habitable lifetime">
+        <div class="panel-caption"><b>Longer-lived worlds get many more lottery tickets.</b>Red dwarfs live for ages, so if they are truly habitable, something must suppress their habitability by orders of magnitude.</div>
+      </div>
+      <div class="panel-card">
+        <img src="assets/v7_extras/snyder_fig5_bottom_abiogenesis_window.jpg" alt="Probability ratio for abiogenesis window compared to 3.8 Gya baseline">
+        <div class="panel-caption"><b>Earlier starts help, but modestly.</b>Mars or asteroids as early habitable environments nudge the odds upward; they do not magically solve abiogenesis.</div>
+        <div class="source-line">Snyder-Beattie et al., <em>Astrobiology</em> 2021, Fig. 5</div>
+      </div>
+    </div>
+    <div class="synthesis-grid">
+      <div class="synthesis-card">
+        <img src="assets/v6_extras/miller_urey.png" alt="Miller-Urey experimental apparatus">
+        <div><b>Miller-Urey</b>Small molecules can become biologically useful organics when water, atmosphere, and energy interact.</div>
+      </div>
+      <div class="synthesis-card">
+        <img src="assets/v8_extras/source/Symbiogenesis_2_mergers.svg" alt="Symbiogenesis diagram showing two mergers">
+        <div><b>Symbiogenesis</b>Hard steps are not only chemistry. Complex cells also required cooperation becoming inheritance.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 4 - Origin settings and early evidence -->
+  <section class="slide origin v9-origin">
+    <div class="kicker">16.9 &middot; chemistry becomes life</div>
+    <h1>Origin clues are places, minerals, molecules, and communities</h1>
+    <div class="stage">
+      <div class="memory-grid compact">
+        <div class="memory-card feature contain">
+          <div class="hapcheon-collage" aria-label="Hapcheon basin crop, azalea sunset, and floating solar panels">
+            <img class="map-crop" src="assets/v9_extras/source/frontiers_hapcheon_g001.jpg" alt="Hapcheon Basin map showing inset locator, satellite view, fan-system DEM, and elevation profile">
+            <img src="assets/final_extras/source/hwangmaesan_sunset_azaleas.jpeg" alt="Hwangmaesan azaleas at sunset in Hapcheon">
+            <img src="assets/final_extras/source/hapcheon_floating_solar.jpg" alt="Flower-shaped floating solar panels at Hapcheon Dam">
+          </div>
+          <div class="memory-copy"><b>Hapcheon crater basin</b>Impact basin, lived-in landscape: crater science beside azaleas, reservoirs, and solar flowers.</div>
+        </div>
+        <div class="memory-card">
+          <img src="assets/v6_extras/hot_spring_microbe_crop.jpg" alt="Aerial view of Grand Prismatic Spring microbial mats">
+          <div class="memory-copy"><b>Iron-sulfide hot springs</b>Hot mineral water, wet-dry cycles, and sulfide surfaces can concentrate and catalyze chemistry.</div>
+        </div>
+        <div class="memory-card">
+          <img src="assets/v9_extras/lokis_castle_iron_sulfide_vents.jpg" alt="Loki's Castle hydrothermal vent field">
+          <div class="memory-copy"><b>Loki's Castle vents</b>Actual iron-sulfide vent field: chimneys and chemical gradients as natural batteries.</div>
+        </div>
+        <div class="memory-card">
+          <img src="assets/v6_extras/stromatolites_shark_bay_crop.jpg" alt="Living stromatolites in Shark Bay, Australia">
+          <div class="memory-copy"><b>Shark Bay stromatolites</b>Clean visual cue: layered microbial mats, life as a rock-building community.</div>
+        </div>
+      </div>
+    </div>
+    <div class="asgard-note">
+      <b>Asgard archaea:</b> likely host-lineage relatives found near Loki's Castle, with deliberately Norse names: Lokiarchaeota, Thorarchaeota, Odinarchaeota, Heimdallarchaeota.
+    </div>
+  </section>
+
+  <!-- Slide 5 - Gaia finale -->
+  <section class="slide gaia-finale">
+    <div class="kicker">synthesis &middot; Gaia, twice</div>
+    <h1>Gaia means measuring worlds, and remembering we live inside one</h1>
+    <div class="stage">
+      <div class="idea-grid">
+        <div class="idea-card"><b>Gaia the mission</b>Astrometry watches stars wobble sideways on the sky. That complements transits and Doppler, especially for systems whose orbits are not edge-on to us.</div>
+        <div class="idea-card"><b>Gaia the idea</b>Life does not merely sit on a planet. It changes atmosphere, chemistry, climate, and future habitability.</div>
+        <div class="idea-card"><b>Mars as nearby test</b>If Mars and Earth shared rocks, water, organics, or ancestry, the first step may belong to the early inner solar system, not just Earth.</div>
+        <div class="idea-card"><b>The filtered view</b>We are not central; we are filtered. The question is which filters are behind us, and which ones we still have to pass.</div>
+      </div>
+      <div class="mars-panel">
+        <div class="mars-thumb">
+          <img src="assets/v9_extras/mars_kaolinite_jezero.jpg" alt="Kaolinite-bearing rocks in Jezero crater, Mars">
+          <div><b>Kaolinite in Jezero</b>Persistent water-rock weathering: the wet Mars cue.</div>
+        </div>
+        <div class="mars-thumb">
+          <img src="assets/v9_extras/mars_long_chain_hydrocarbons.jpg" alt="NASA graphic showing long-chain hydrocarbons detected on Mars">
+          <div><b>Long-chain organics</b>Cumberland mudstone: decane, undecane, dodecane.</div>
+        </div>
+      </div>
+      <div class="image-card">
+        <img src="assets/v8_extras/gaia_spacecraft_crop.jpg" alt="ESA Gaia spacecraft against a star field">
+        <div class="image-copy">
+          <b>The same word points both directions.</b>
+          Gaia looks outward, mapping the architecture of nearby solar systems. Gaia also points inward: habitability is a relationship between life and its world.
+          <div class="closing-line">That is the anthropic principle with the ego removed: not "we are special," but "our evidence comes from the kind of world that could make evidence."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
